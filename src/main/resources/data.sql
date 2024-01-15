@@ -10,5 +10,7 @@ INSERT IGNORE INTO roles (id, name) VALUES (2,'USER');
 
 INSERT IGNORE INTO users_roles (user_id, roles_id) VALUES (1,1);
 
+INSERT IGNORE INTO users_roles (user_id, roles_id) VALUES (1,2);
+
 INSERT IGNORE INTO users_roles (user_id, roles_id) VALUES (2,2);
 
