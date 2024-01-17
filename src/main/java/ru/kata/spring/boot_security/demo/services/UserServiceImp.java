@@ -37,8 +37,8 @@ public class UserServiceImp implements UserService, UserDetailsService {
     }
 
     public void saveUser(User user) {
-        if (!user.getName().isBlank() && !user.getLastname().isBlank() && !user.getUsername().isBlank() && !user.getPassword().isBlank() && (user.getAge() != 0)) {
-            if (findUserByUsername(user.getUsername()) == null) {
+        if (!user.getName().isBlank() && !user.getLastname().isBlank() && !user.getEmail().isBlank() && !user.getPassword().isBlank() && (user.getAge() > 0)) {
+            if (findUserByEmail(user.getEmail()) == null) {
                 userRepository.save(user);
             }
         }
@@ -46,7 +46,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     public void updateUser(User user, Long id) {
         User updateUser = findUser(id);
-        if (!user.getName().isBlank() && !user.getLastname().isBlank() && !user.getUsername().isBlank() && user.getAge() != 0) {
+        if (!user.getName().isBlank() && !user.getLastname().isBlank() && !user.getEmail().isBlank() && user.getAge() > 0) {
             if (user.getPassword().isBlank()) {
                 user.setPassword(updateUser.getPassword());
                 userRepository.save(user);
