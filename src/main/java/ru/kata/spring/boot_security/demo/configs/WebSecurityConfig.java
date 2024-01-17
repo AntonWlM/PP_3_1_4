@@ -14,8 +14,11 @@ import ru.kata.spring.boot_security.demo.services.UserServiceImp;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     private final SuccessUserHandler successUserHandler;
+
     private UserServiceImp userService;
+
     @Autowired
     public void setUserService(UserServiceImp userService) {
         this.userService = userService;

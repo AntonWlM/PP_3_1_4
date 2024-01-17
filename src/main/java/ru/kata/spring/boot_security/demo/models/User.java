@@ -19,14 +19,19 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private String lastname;
+
     private int age;
+
     @NotNull
     private String password;
 
     @NotNull
     private String email;
+
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles;
 
@@ -39,14 +44,18 @@ public class User implements UserDetails {
         this.email = email;
         this.roles = roles;
     }
+
     public User() {}
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getAuthority())).collect(Collectors.toList());
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getPassword() {
         return password;
     }

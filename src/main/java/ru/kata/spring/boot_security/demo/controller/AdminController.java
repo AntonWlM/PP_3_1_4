@@ -18,8 +18,8 @@ public class AdminController {
 
     private final UserService userService;
 
-
     private final RoleService roleService;
+
     @Autowired
     public AdminController(UserServiceImp userService, RoleService roleService) {
         this.userService = userService;

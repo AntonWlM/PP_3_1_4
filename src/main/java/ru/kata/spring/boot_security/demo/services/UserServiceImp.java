@@ -23,15 +23,16 @@ public class UserServiceImp implements UserService, UserDetailsService {
         this.userRepository = userRepository;
     }
 
-
     public User findUserByEmail(String email) throws UsernameNotFoundException {
         return userRepository.findUserByEmail(email);
     }
-    @Query("Select u from User u left join fetch u.roles")
+
+    @Query("Select u from User u left join fetch u.roles")//todo: зачем?.. это же реализовано в repository слое
     public List<User> getListUsers() {
         return userRepository.findAll();
     }
 
+    //todo: @Transactional c параметром READ_ONLY на этом и подобных необходимых методах
     public User findUser(Long id) {
         return userRepository.getById(id);
     }

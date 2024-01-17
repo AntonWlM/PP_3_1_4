@@ -7,6 +7,7 @@ import ru.kata.spring.boot_security.demo.repositoties.RoleRepository;
 import java.util.List;
 @Service
 public class RoleService {
+
     private final RoleRepository roleRepository;
 
     public RoleService(RoleRepository roleRepository) {
