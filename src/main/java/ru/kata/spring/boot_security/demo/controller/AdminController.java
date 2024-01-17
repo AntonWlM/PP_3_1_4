@@ -51,7 +51,8 @@ public class AdminController {
     @PostMapping(value = "/save")
     public String saveUser(@ModelAttribute("user") User user) {
         String encodedPassword = new BCryptPasswordEncoder(12).encode(user.getPassword());
-        user.setPassword(encodedPassword);
+        if (!user.getPassword().isBlank()) {
+            user.setPassword(encodedPassword);}
         userService.saveUser(user);
         return "redirect:/admin/";
     }
