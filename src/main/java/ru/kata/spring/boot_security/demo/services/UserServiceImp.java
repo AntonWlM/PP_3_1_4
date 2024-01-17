@@ -37,19 +37,25 @@ public class UserServiceImp implements UserService, UserDetailsService {
     }
 
     public void saveUser(User user) {
-        if (!user.getName().isBlank() && !user.getLastname().isBlank() && !user.getEmail().isBlank() &&!user.getPassword().isBlank()) {
-            if (findUserByEmail(user.getUsername()) == null) {
-                    userRepository.save(user);}}
+        if (!user.getName().isBlank() && !user.getLastname().isBlank() && !user.getUsername().isBlank() && !user.getPassword().isBlank() && (user.getAge() != 0)) {
+            if (findUserByUsername(user.getUsername()) == null) {
+                userRepository.save(user);
+            }
+        }
     }
+
     public void updateUser(User user, Long id) {
         User updateUser = findUser(id);
-        if (user.getPassword().isBlank()) {
-            user.setPassword(updateUser.getPassword());
-        } else {
-            String encodedPassword = new BCryptPasswordEncoder(12).encode(user.getPassword());
-            user.setPassword(encodedPassword);
+        if (!user.getName().isBlank() && !user.getLastname().isBlank() && !user.getUsername().isBlank() && user.getAge() != 0) {
+            if (user.getPassword().isBlank()) {
+                user.setPassword(updateUser.getPassword());
+                userRepository.save(user);
+            } else {
+                String encodedPassword = new BCryptPasswordEncoder(12).encode(user.getPassword());
+                user.setPassword(encodedPassword);
+                userRepository.save(user);
+            }
         }
-        userRepository.save(user);
     }
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
